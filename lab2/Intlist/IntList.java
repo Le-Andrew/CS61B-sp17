@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Formatter;
 
 /**
@@ -80,8 +82,20 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        /* Iterative approach */
+
+        /* Need to append items to the end of A */
+        IntList tail = A;
+
+        while (tail.rest != null) {
+            tail = tail.rest;
+        }
+
+        tail.rest = new IntList(B.first, B.rest);
+
+        /* Recursive approach */
+
+        return A;
     }
 
     /**
@@ -89,8 +103,38 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        if (A == null || B == null) {
+            return null;
+        }
+
+        /* Iterative approach */
+        IntList result = new IntList(A.first, null);
+        IntList ptr = result;
+
+        A = A.rest;
+
+        while (A != null) {
+            ptr.rest = new IntList(A.first, null);
+            ptr = ptr.rest;
+            A = A.rest;
+        }
+
+        ptr.rest = new IntList(B.first, null);
+        B = B.rest;
+        while (B != null) {
+            ptr = ptr.rest;
+            ptr.rest = new IntList(B.first, null);
+            B = B.rest;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        IntList myList = IntList.list(0, 1, 2, 3);
+        StdOut.println(myList.first);
+        StdOut.println(myList.rest);
+        StdOut.println(myList.rest.rest.rest);
+        StdOut.println(myList.rest.rest.rest.rest);
     }
 
 

@@ -16,16 +16,16 @@ public class EscapeFromTheSodaLabs extends Trial {
 
     public static void trap(Traveler t) {
         treasureChest(t);
-        for (int i = 0; i < 10; i++) {
+//        for (int i = 0; i < 10; i++) {
             nothingHere(t);
-        }
+//        }
     }
 
     public static void superTrap(Traveler t) {
         treasureChest(t);
         trap(t);
-        for (int i = 0; i < 10; i++) {
+//        for (int i = 0; i < 10; i++) {
             nothingHere(t);
-        }
+//        }
     }
 }
