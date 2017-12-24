@@ -59,7 +59,7 @@ public class IntListTest {
 
     @Test
     public void testCatenate() {
-        IntList A = IntList.list(1,2,3);
+        IntList A = IntList.list(1, 2, 3);
         IntList B = IntList.list(4, 5, 6);
         IntList exp = IntList.list(1, 2, 3, 4, 5, 6);
         assertEquals(exp, IntList.catenate(A, B));
@@ -71,13 +71,11 @@ public class IntListTest {
         IntList input = IntList.list(1, 2, 3, 4, 5, 6, 10);
         IntList reversed = IntList.list(10, 6, 5, 4, 3, 2, 1);
 
-        /* Tests reversed list */
+        /** KEK. */
         assertEquals(reversed, IntList.reverse(input));
 
-        /* Test function is destructive */
         assertNotEquals(IntList.list(1, 2, 3), input);
 
-        /* Method handles null correctly */
         assertEquals(null, IntList.reverse(null));
 
     }
