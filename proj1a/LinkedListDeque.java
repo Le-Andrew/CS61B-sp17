@@ -1,6 +1,11 @@
+/**
+ * No error checking.
+ * @param <Item>
+ */
 public class LinkedListDeque<Item> {
 
-
+    private int size;
+    private ListNode sentinel;
 
     class ListNode<Item> {
         Item item;
@@ -12,8 +17,6 @@ public class LinkedListDeque<Item> {
         }
     }
 
-    private int size;
-
     public LinkedListDeque() {
         size = 0;
         sentinel = new ListNode<Item>(null); /* Don't care what value inside node */
@@ -21,13 +24,11 @@ public class LinkedListDeque<Item> {
         sentinel.prev = sentinel;
     }
 
-    private ListNode sentinel;
-
     public void addFirst(Item item) {
         ListNode<Item> insertedNode = new ListNode<Item>(item);
         ListNode<Item> oldFirst = sentinel.next;
 
-        insertedNode.prev = sentinel.prev;
+        insertedNode.prev = sentinel;
         insertedNode.next = sentinel.next;
 
         /* Make old first's previous point to new first */
@@ -90,7 +91,7 @@ public class LinkedListDeque<Item> {
         Item result = last.item;
 
         /* Update pointers */
-        last.prev = sentinel;
+        last.prev.next = sentinel;
         sentinel.prev = last.prev;
 
         size -= 1;
@@ -124,12 +125,24 @@ public class LinkedListDeque<Item> {
     public static void main(String[] args) {
         LinkedListDeque<Integer>  test = new LinkedListDeque<Integer>();
 
-        test.addFirst(9);
-        test.addLast(2);
+        test.addFirst(0);
+        test.addFirst(1);
+        test.addFirst(2);
+        test.addFirst(3);
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
+        test.removeLast();
         test.addLast(3);
-        test.addLast(4);
-        test.addFirst(4);
-        test.addLast(5);
+        test.addLast(2);
+        test.addLast(1);
+        test.addLast(0);
+        test.removeFirst();
+        test.removeFirst();
+        test.removeFirst();
+        test.removeFirst();
+        test.removeLast();
+        test.removeLast();
 
         test.printDeque();
 
