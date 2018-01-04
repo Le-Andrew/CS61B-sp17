@@ -130,18 +130,23 @@ public class ArrayDeque<Item> {
 
     public static void main(String[] args) {
         ArrayDeque<Integer>  test = new ArrayDeque<Integer>();
-        for (int i = 0; i < 32; i++) {
-            test.addFirst(i);
-        }
 
-        for (int i = 0; i < 30; i++) {
-            test.removeFirst();
-        }
-//        test.addFirst(9);
-//        test.addLast(2);
-//        test.addLast(3);
-//        test.addLast(4);
-//        test.addLast(5);
+        test.addFirst(0);
+        test.addFirst(1);
+        test.addFirst(2);
+        test.addFirst(3);
+        test.removeFirst();
+        test.removeFirst();
+        test.removeLast();
+        test.removeLast();
+        test.addLast(3);
+        test.addLast(2);
+        test.addLast(1);
+        test.addLast(0);
+        test.removeFirst();
+        test.removeFirst();
+        test.removeLast();
+        test.removeLast();
 
         test.printDeque();
 

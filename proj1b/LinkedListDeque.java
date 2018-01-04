@@ -1,6 +1,6 @@
 /**
- * No error checking.
- * @param <Item>
+ * Concrete implementation of the deque ADT.
+ * @param <Item> generic over this type.
  * @author Andrew Le
  */
 public class LinkedListDeque<Item> implements Deque<Item> {
