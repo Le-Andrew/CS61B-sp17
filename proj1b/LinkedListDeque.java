@@ -1,31 +1,51 @@
 /**
  * No error checking.
  * @param <Item>
+ * @author Andrew Le
  */
-
-// TODO: Broken removeFirst -> rmoveLast -> rmoveFirst
 public class LinkedListDeque<Item> implements Deque<Item> {
-
+    /** Current size of deque. */
     private int size;
+
+    /** Sentinel node to make adding/removing code simpler. */
     private ListNode sentinel;
 
+    /** Class representing a linked list node. */
     class ListNode<Item> {
-        Item item;
-        ListNode next;
-        ListNode prev;
+        /** element contained in this node. */
+        private Item item;
 
+        /** Next node. */
+        private ListNode next;
+
+        /** Previous node. */
+        private ListNode prev;
+
+        /**
+         * Constructor for a node.
+         * @param item element contained in this node.
+         */
         public ListNode(Item item) {
             this.item = item;
         }
     }
 
+    /**
+     * Construct for this deque.
+     */
     public LinkedListDeque() {
         size = 0;
-        sentinel = new ListNode<Item>(null); /* Don't care what value inside node */
+
+        /* Don't care what value the sentinel node contains. */
+        sentinel = new ListNode<Item>(null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
     }
 
+    /**
+     * Adds an item to the front of the deque.
+     * @param item item to be added.
+     */
     @Override
     public void addFirst(Item item) {
         ListNode<Item> insertedNode = new ListNode<Item>(item);
@@ -41,6 +61,10 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         size += 1;
     }
 
+    /**
+     * Adds an item to the end of the deque.
+     * @param item item to be added.
+     */
     @Override
     public void addLast(Item item) {
         ListNode<Item> insertedNode = new ListNode<Item>(item);
@@ -49,23 +73,36 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         insertedNode.next = sentinel;
         insertedNode.prev = oldLast;
 
-        /* Update pointers: the last element is sentinel node's previous, due to circular topology. */
+        /* Update pointers: the last element is sentinel node's previous,
+         * due to circular topology. */
         oldLast.next = insertedNode;
         sentinel.prev = insertedNode;
 
         size += 1;
     }
 
+    /**
+     * Returns true if this deque contains no item.
+     * @return
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Returns the number of elements in this deque.
+     * @return the number of elements in this deque.
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Prints out the elements of the deque separated by a space and a new line at the end.
+     * e.g. {0, 1, 2} would print as "0 1 2" with a new line at the end.
+     */
     @Override
     public void printDeque() {
         ListNode<Item> currentNode = sentinel.next;
@@ -119,6 +156,13 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         return currentNode.item;
     }
 
+    /**
+     * Recursive helper for getRecursive. Base case is when the index counter reaches 0,
+     * which means the deque has been traversed index times from the first element.
+     * @param index helper argument for recursion.
+     * @param node current node the traversal points to.
+     * @return node to be returned.
+     */
     private ListNode<Item> getRecursive(int index, ListNode<Item> node) {
         if (index == 0) {
             return node;
@@ -126,12 +170,21 @@ public class LinkedListDeque<Item> implements Deque<Item> {
         return getRecursive(index - 1, node.next);
     }
 
-    // TODO: Find out why I cannot just do getRecursive(index, sentinel).item;
+    /**
+     * Gets an item located at position first + index. The first element would be 0, and the final
+     * element size() - 1.
+     * @param index index of item to retrieve.
+     * @return reference to item at index position within deque.
+     */
     public Item getRecursive(int index) {
         ListNode<Item> result = getRecursive(index, sentinel.next);
         return result.item;
     }
 
+    /**
+     * Main method.
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         Deque<Character> word = new LinkedListDeque<Character>();
         word.addLast('t');
