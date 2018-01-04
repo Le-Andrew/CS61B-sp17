@@ -43,7 +43,7 @@ public class LinkedListDeque<Item> {
         ListNode<Item> oldLast = sentinel.prev;
 
         insertedNode.next = sentinel;
-        insertedNode.prev = oldLast.prev;
+        insertedNode.prev = oldLast;
 
         /* Update pointers: the last element is sentinel node's previous, due to circular topology. */
         oldLast.next = insertedNode;
